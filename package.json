@@ -1,0 +1,82 @@
+{
+  "name": "viae-ws",
+  "version": "0.1.0",
+  "description": "WebSocket implementation of a Viae Wire",
+  "main": "dist/commonjs/index.js",
+  "typings": "dist/commonjs/index.d.ts",
+  "scripts": {
+    "lint": "cross-env tslint --project tsconfig.json --config tslint.json",
+    "clean": "cross-env rimraf .tmp .nyc_output coverage dist",
+    "build": "npm run clean && concurrently \"npm run build:es2017\" \"npm run build:es2015\" \"npm run build:commonjs\"",
+    "build:es2017": "cross-env tsc --project tsconfig.build.json --rootDir src/ --outDir ./dist/es2017 --module es2015 --target es2017",
+    "build:es2015": "cross-env tsc --project tsconfig.build.json --rootDir src/ --outDir ./dist/es2015 --module es2015",
+    "build:commonjs": "cross-env tsc --project tsconfig.build.json --rootDir src/ --outDir ./dist/commonjs --module commonjs",
+    "debug": "npm run clean && cross-env tsc --project tsconfig.json --outDir ./.tmp/ --module commonjs ",
+    "test": "nyc node_modules/mocha/bin/_mocha --require source-map-support/register --compilers ts:ts-node/register test/*.ts",
+    "cover": "codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeirionHughes/viae-ws.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "api",
+    "rowan",
+    "middleware",
+    "request",
+    "response",
+    "websocket",
+    "ws",
+    "stream"
+  ],
+  "author": "Meirion Hughes <crakinshot@yahoo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MeirionHughes/viae-ws/issues"
+  },
+  "homepage": "https://github.com/MeirionHughes/viae-ws#readme",
+  "devDependencies": {
+    "@types/chai": "^3.5.0",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7",
+    "chai": "^3.5.0",
+    "codecov": "^1.0.1",
+    "concurrently": "^3.4.0",
+    "cross-env": "^3.2.4",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
+    "rimraf": "^2.5.4",
+    "ts-node": "^2.0.0",
+    "tslint": "^4.3.1",
+    "typescript": "^2.3.x"
+  },
+  "dependencies": {
+    "lite-event-emitter": "^1.0.2",
+    "viae": "*"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules/",
+      "dist/"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "html",
+      "lcov"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  }
+}
