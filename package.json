@@ -1,6 +1,6 @@
 {
   "name": "viae-ws",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "WebSocket implementation of a Viae Wire",
   "main": "dist/commonjs/index.js",
   "typings": "dist/commonjs/index.d.ts",
