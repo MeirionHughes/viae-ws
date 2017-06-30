@@ -54,7 +54,9 @@
     "typescript": "^2.3.x"
   },
   "dependencies": {
-    "lite-event-emitter": "^1.0.2",
+    "lite-event-emitter": "^1.0.2"
+  },
+  "peerDependencies": {
     "viae": "*"
   },
   "nyc": {
